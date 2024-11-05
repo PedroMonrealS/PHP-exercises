@@ -285,7 +285,7 @@ bool(true)
 
 ### isset
 
-Verificar si un elemento existe en un array asociativo
+En PHP, isset() es una función que determina si una variable está definida y no es null. Devuelve true si la variable existe y tiene un valor distinto de null, y false en caso contrario. Es muy útil para verificar si una variable fue inicializada antes de intentar usarla, evitando errores.
 
 var_dump(isset($phoneNumber))
 
