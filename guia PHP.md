@@ -5,9 +5,17 @@
     - [is\_int](#is_int)
   - [Tratar strings](#tratar-strings)
     - [strlen](#strlen)
+    - [substr](#substr)
+    - [strpos](#strpos)
+    - [Trim](#trim)
+    - [strtoupper](#strtoupper)
+    - [strtolower](#strtolower)
+    - [str\_replace](#str_replace)
+    - [range](#range)
   - [Funciones](#funciones)
     - [Variable opcional en funciones](#variable-opcional-en-funciones)
   - [Arrays](#arrays)
+    - [print\_r ($array);](#print_r-array)
     - [array\_key\_exists](#array_key_exists)
     - [array\_values](#array_values)
     - [explode](#explode)
@@ -16,14 +24,25 @@
     - [isset](#isset)
     - [array\_search](#array_search)
     - [sort](#sort)
+    - [asort](#asort)
+    - [ksort](#ksort)
+    - [krsort](#krsort)
     - [shuffle](#shuffle)
-    - [Recorrer un array](#recorrer-un-array)
+    - [foreach](#foreach)
     - [Recorrer un array asociativo](#recorrer-un-array-asociativo)
+    - [empty()](#empty)
+    - [Count](#count)
+    - [matriz](#matriz)
+    - [Array](#array)
+    - [array\_merge](#array_merge)
+    - [array asociativo](#array-asociativo)
   - [Bucles](#bucles)
     - [for](#for)
     - [While](#while)
     - [do while](#do-while)
     - [tabla con html](#tabla-con-html)
+  - [Operadores](#operadores)
+    - [$val+= 5;](#val-5)
 
 ## Condicionales
 
@@ -66,6 +85,98 @@ echo strlen($var1);
 ````
 4
 ````
+
+### substr
+
+Extraer de una cadena la cantidad que queremos
+````
+echo substr('abcdef', 3, 1);
+````
+
+**RESULTADO**
+
+````
+d
+````
+
+### strpos
+
+
+La función strpos() en PHP se utiliza para encontrar la posición de la primera aparición de una subcadena dentro de una cadena. Devuelve el índice de la primera ocurrencia de la subcadena (empezando desde 0) o false si la subcadena no se encuentra.
+````
+
+strpos("cadena_completa", "subcadena_a_buscar");
+
+
+$cadena = "Hola, ¿cómo estás?";
+$posicion = strpos($cadena, "cómo");
+
+if ($posicion !== false) {
+    echo "La palabra 'cómo' se encuentra en la posición: " . $posicion;
+} else {
+    echo "La palabra 'cómo' no se encuentra en la cadena.";
+}
+````
+**RESULTADO**
+
+````
+La palabra 'cómo' se encuentra en la posición: 6
+````
+
+### Trim
+
+Sirve para eliminar espacios en blanco u otros carácteres específicos.
+
+````
+$texto = "  Hola mundo  ";
+$resultado = trim($texto);
+echo $resultado; // Salida: "Hola mundo"
+````
+
+### strtoupper
+Pasa un string a mayusculas
+````
+$userid = "PedroMonreal123";
+$userid = strtoupper($userid);
+echo $userid; // Salida: "PEDROMONREAL123"
+````
+
+### strtolower
+Pasa un string a minusculas
+
+````
+$userid = strtolower($userid);
+````
+
+### str_replace
+Remplaza caracteres
+````
+$date="12/12/2012";
+$date=str_replace("/","-",$date);
+echo $date."<br>\n";
+````
+
+### range
+
+Genera un array que contiene los carácteres o numeros en el rango.
+
+````
+<?php
+// Crear un array con los números del 0 al 9
+$digits = range(0, 9);
+
+// Crear un array con las letras de la A a la F
+$digits2 = range("A", "F");
+
+// Mostrar el contenido de $digits
+echo "Array de dígitos del 0 al 9:\n";
+print_r($digits);
+
+// Mostrar el contenido de $digits2
+echo "Array de letras de la A a la F:\n";
+print_r($digits2);
+?>
+````
 ## Funciones
 
 ###  Variable opcional en funciones
@@ -80,6 +191,9 @@ function getWeekDayStr($number, $language = 'en'){
 ````
 ## Arrays
 
+### print_r ($array);
+
+Muestra el contenido de un array
 
 ### array_key_exists
 
@@ -232,6 +346,25 @@ Array
     [3] => verde
 )
 ````
+
+### asort
+Ordena un array asociativo 
+````
+asort($phoneNumbers);
+````
+
+### ksort
+Ordena un array asociativo por clave
+````
+ksort($phoneNumbers);
+````
+
+### krsort
+Ordena un array asociativo por clave al revés
+````
+krsort($phoneNumbers); //reverse order
+````
+
 ### shuffle
 
 Desordenar los valores del array
@@ -268,7 +401,7 @@ shuffle($colors);
 showArray($colors); 
 ````
 
-### Recorrer un array
+### foreach
 
 Recorrer un array
 
@@ -323,6 +456,59 @@ Añade el campo Mike con sus atributos.
     showArray($users);
 
 ````
+
+### empty()
+
+Verificar si un array está vacío.
+
+````
+if (empty($values)){
+  return false;
+}
+````
+### Count
+
+Dice la longitud del array
+
+````
+count($array);
+````
+
+### matriz
+
+````
+$matrix = array(
+    array(1, 2, 3),
+    array(4, 5, 6),
+    array(7, 8, 9)
+);
+````
+
+### Array
+
+La función array crea un array con los valores establecidos.
+
+````
+$array1 = array(1, 2, 3);
+````
+### array_merge
+
+````
+$mergedArray = array_merge($digits, $letters);
+````
+
+### array asociativo
+
+````
+$phoneNumbers = array(
+    "Pedro" => "123-456-7890",
+    "Ana" => "987-654-3210",
+    "Luis" => "555-555-5555",
+    "Marta" => "333-333-3333"
+);
+
+````
+
 ## Bucles
 
 ### for
@@ -440,3 +626,12 @@ echo "</table>\n";
 9	18	27	36	45	54	63	72	81	90
 10	20	30	40	50	60	70	80	90	100
 ````
+
+## Operadores
+
+### $val+= 5;
+
+Sirve para sumer un valor a una variable funciona igual que:
+
+````
+$val = $val + 5;
