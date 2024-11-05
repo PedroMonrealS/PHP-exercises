@@ -1,6 +1,8 @@
 # Guia PHP
+## Pedro Monreal Sánchez
 
 - [Guia PHP](#guia-php)
+  - [Pedro Monreal Sánchez](#pedro-monreal-sánchez)
   - [Condicionales](#condicionales)
     - [is\_int](#is_int)
   - [Tratar strings](#tratar-strings)
@@ -41,6 +43,7 @@
     - [While](#while)
     - [do while](#do-while)
     - [tabla con html](#tabla-con-html)
+    - [tabla con html array asociativo](#tabla-con-html-array-asociativo)
   - [Operadores](#operadores)
     - [$val+= 5;](#val-5)
 
@@ -627,6 +630,43 @@ echo "</table>\n";
 10	20	30	40	50	60	70	80	90	100
 ````
 
+### tabla con html array asociativo
+````
+<?php
+
+function array2table($col1, $col2, $array) {
+    $table="<table border=solid>\n";
+    if($col1 != ("") && $col2 !=("")){
+        $table.="<tr><th>$col1</th><th>$col2</th></tr>\n";
+    }
+    foreach ($array as $v1 => $v2) {
+        $table.= "<tr><td>$v1</td><td>$v2</td></tr>\n";
+    }
+    $table.="</table>\n";
+    return $table;
+}
+
+$datos = [
+    "Pedro" => "848559340",
+    "Miguel" => "384442023",
+    "Juan" => "444556732"
+];
+
+echo array2table("Name", "Phone", $datos);
+
+?>
+
+
+
+````
+**RESULTADO**
+
+````
+Name	Phone
+Pedro	848559340
+Miguel	384442023
+Juan	444556732
+````
 ## Operadores
 
 ### $val+= 5;
