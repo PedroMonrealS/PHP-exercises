@@ -21,4 +21,3 @@ $datos = [
 echo array2table("Name", "Phone", $datos);
 
 ?>
-

@@ -17,9 +17,10 @@
   - [Funciones](#funciones)
     - [Variable opcional en funciones](#variable-opcional-en-funciones)
   - [Arrays](#arrays)
+    - [is\_array](#is_array)
     - [print\_r ($array);](#print_r-array)
     - [array\_key\_exists](#array_key_exists)
-    - [array\_values](#array_values)
+    - [array\_values (Elimina huecos vacíos)](#array_values-elimina-huecos-vacíos)
     - [explode](#explode)
     - [implode](#implode)
     - [in\_array](#in_array)
@@ -40,6 +41,7 @@
     - [array asociativo](#array-asociativo)
   - [Bucles](#bucles)
     - [for](#for)
+    - [For de 3 en 3](#for-de-3-en-3)
     - [While](#while)
     - [do while](#do-while)
     - [tabla con html](#tabla-con-html)
@@ -194,6 +196,15 @@ function getWeekDayStr($number, $language = 'en'){
 ````
 ## Arrays
 
+### is_array
+
+Dice si el valor es un array o no, devuelve true o false.
+
+````
+$array=["a", "s", "g"];
+
+var_dump(is_array($array));
+````
 ### print_r ($array);
 
 Muestra el contenido de un array
@@ -211,7 +222,7 @@ if (array_key_exists($language, $days)) {
 ````
 
 
-### array_values
+### array_values (Elimina huecos vacíos)
 
 Reindexa los valores de array
 
@@ -219,7 +230,7 @@ Elimina los huecos vacios
 ````
 $names=["Pedro","Christian","Biel"]
 
-array_values($names);
+$names = array_values($names);
 ````
 
 
@@ -537,7 +548,13 @@ Tabla del 5
 9 x 5= 45
 10 x 5= 50
 ````
-
+### For de 3 en 3
+````
+echo "<h2>De 3 en  3</h2>";
+for($i=30; $i<=50;$i+=3){
+echo $i . ", ";
+}
+````
 
 ### While
 
