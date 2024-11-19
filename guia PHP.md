@@ -770,3 +770,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ````
 if ($_SERVER["REQUEST_METHOD"] == "POST") {}
 ````
+En el caso del formulario, podemos usar if GET para que solo muestre el formulario al cargar la página, si se hace el POST no se mostrará.

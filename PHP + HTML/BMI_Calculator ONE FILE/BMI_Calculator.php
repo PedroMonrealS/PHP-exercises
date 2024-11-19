@@ -16,6 +16,7 @@
   <input type="submit">
 </form>
 
+<br><br>
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
      if (!isset($_POST["weight"], $_POST["height"]) || empty($_POST["weight"]) || empty($_POST["height"])) {
