@@ -3,22 +3,17 @@
 
 Tip: You can save the set of letters in a string and select the one that you need from the string. */
 
-$DNI="12345678Z";
-$LETRAS=["T","R","W","A","G","M","Y","F","P","D","X","B","N","J","Z","S","Q","V","H","L","C","K"];
-$NUMEROS=substr($DNI, 0,-1);
-$LETRA=substr($DNI, 8);
+$DNI = "12345678Z";
+$LETRAS = ["T", "R", "W", "A", "G", "M", "Y", "F", "P", "D", "X", "B", "N", "J", "Z", "S", "Q", "V", "H", "L", "C", "K"];
+$NUMEROS = substr($DNI, 0, -1);
+$LETRA = substr($DNI, 8);
 
-$COMP = ($NUMEROS%23);
+$COMP = ($NUMEROS % 23);
 $LETRACORRECTA = $LETRAS[$COMP];
 
 if ($LETRACORRECTA == $LETRA) {
 
     echo "El DNI " . $DNI . " es correcto.";
-}
-else
-{
+} else {
     echo "El DNI " . $DNI . " es incorrecto.";
-
 }
-
-?>

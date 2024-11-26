@@ -51,6 +51,8 @@
     - [$val+= 5;](#val-5)
   - [HTML + PHP](#html--php)
     - [**Form** + **post** en el mismo fichero](#form--post-en-el-mismo-fichero)
+    - [Tabla con arrays formulario](#tabla-con-arrays-formulario)
+  - [Tablas](#tablas)
 
 ## Condicionales
 
@@ -168,6 +170,10 @@ Remplaza caracteres
 ````
 $date="12/12/2012";
 $date=str_replace("/","-",$date);
+
+//Otra forma, usando un array de formas
+$date=str_replace(["*",";"],"-",$date);
+
 echo $date."<br>\n";
 ````
 
@@ -771,3 +777,104 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {}
 ````
 En el caso del formulario, podemos usar if GET para que solo muestre el formulario al cargar la página, si se hace el POST no se mostrará.
+
+### Tabla con arrays formulario
+
+````
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="iso-8859-1">
+    <title>Inverting Array Table</title>
+</head>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if(isset($_POST["values"]) && $_POST["values"]!=""){
+        $NewArray=explode(",",$_POST["values"]);
+        echo "The list introduced is: <br>";
+        echo array2row($NewArray);
+        echo "The reversed list is:<br>";
+        $array2rowValues=array2row(invertarray($NewArray));
+        if($array2rowValues==FALSE){
+            echo "ERROR";
+        }
+        else
+        echo $array2rowValues;
+
+    }
+    else
+    {
+        echo "ERROR";
+    }
+}
+
+function invertarray($array){
+    if(isset($array) && $array!=""){
+
+    for($i=(count($array)-1); $i >= 0; $i--){
+        $arrayInvertido[]=$array[$i];
+    }
+    return($arrayInvertido);
+}
+else
+{
+    return FALSE;
+}
+}
+
+function array2row($array){
+    if(isset($array)){
+
+    $html = "<table>";
+    foreach($array as $valor){
+     $html .= "<th>$valor</th>";
+    }
+    $html .= "</table>";
+    return $html;
+}
+else
+return FALSE;
+}
+?>
+
+<body>
+    <form action="" method="post">
+        <h1>Introduce a list separating by commas</h1>
+        <textarea name="values"></textarea>
+        <input type="submit">
+    </form>
+</body>
+
+</html>
+
+````
+
+
+## Tablas
+
+````
+<table>
+    <thead> <!-- Encabezado de la tabla -->
+        <tr> <!-- Fila del encabezado -->
+            <th>Columna 1</th>
+            <th>Columna 2</th>
+            <th>Columna 3</th>
+        </tr>
+    </thead>
+    <tbody> <!-- Cuerpo de la tabla -->
+        <tr> <!-- Primera fila de datos -->
+            <td>Dato 1</td>
+            <td>Dato 2</td>
+            <td>Dato 3</td>
+        </tr>
+        <tr> <!-- Segunda fila de datos -->
+            <td>Dato 4</td>
+            <td>Dato 5</td>
+            <td>Dato 6</td>
+        </tr>
+    </tbody>
+</table>
+
+````
