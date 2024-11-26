@@ -23,6 +23,7 @@
     - [array\_key\_exists](#array_key_exists)
     - [array\_values (Elimina huecos vacíos)](#array_values-elimina-huecos-vacíos)
     - [explode](#explode)
+    - [explode con saltos de linia \\n](#explode-con-saltos-de-linia-n)
     - [implode](#implode)
     - [in\_array](#in_array)
     - [isset](#isset)
@@ -277,6 +278,20 @@ showArray($dataArray);
     [2] => 717776040
     [3] => 2004
 )
+````
+### explode con saltos de linia \n
+
+````
+<?php
+
+$string="Surname;Name;Address;Phone
+Rigo;Andreu;C/ My Street, 99;666999666
+Doe;John;C/ 5th Avenue, 3;333111333
+";
+
+$newarray=explode("\n",$string);
+var_dump($newarray);
+?>
 ````
 
 ### implode
