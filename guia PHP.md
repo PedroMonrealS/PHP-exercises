@@ -727,7 +727,7 @@ Sirve para sumer un valor a una variable funciona igual que:
 ````
 $val = $val + 5;
 ````
-## HTML + PHP
+## HTML + PHP   
 
 ### **Form** + **post** en el mismo fichero
 
