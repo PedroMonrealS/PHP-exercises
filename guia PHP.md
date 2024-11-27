@@ -54,6 +54,7 @@
     - [**Form** + **post** en el mismo fichero](#form--post-en-el-mismo-fichero)
     - [Tabla con arrays formulario](#tabla-con-arrays-formulario)
     - [Radio button sticky array asociativo](#radio-button-sticky-array-asociativo)
+    - [Select array asociativo](#select-array-asociativo)
   - [Tablas](#tablas)
     - [Tabla con array asociativo básico](#tabla-con-array-asociativo-básico)
 
@@ -919,6 +920,53 @@ $array = [
     }
 
     ?>
+</body>
+
+</html>
+````
+
+### Select array asociativo
+
+````
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<?php
+$array=[
+    "6.06"=>["Code-Name"=>"Dapper Drake","Relase-Date"=>"2006-06-01"],
+    "8.04"=>["Code-Name"=>"Hardy Heron","Relase-Date"=>"2008-04-24"],
+    "10.04"=>["Code-Name"=>"Lucid Lynx","Relase-Date"=>"2010-04-29"],
+    "12.04"=>["Code-Name"=>"Precise Pangolin","Relase-Date"=>"2012-04-26"]
+]
+?>
+<body>
+    <form action="" method="post">
+        <label for="version">Version</label>
+        <select name="version" id="version">
+            <option value="6.06">6.06</option>
+            <option value="8.04">8.04</option>
+            <option value="10.04">10.04</option>
+            <option value="12.04">12.04</option>
+        </select>
+        <br><br>
+        <label for="property">Property</label>
+        <select name="property" id="property">
+            <option value="Code-Name">Code-Name</option>
+            <option value="Relase-Date">Relase-Date</option>
+        </select>
+        <input type="submit">
+    </form>
+    <?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    echo $array[$_POST["version"]][$_POST["property"]];
+  
+}
+
+?>
 </body>
 
 </html>
