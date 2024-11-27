@@ -53,7 +53,9 @@
   - [HTML + PHP](#html--php)
     - [**Form** + **post** en el mismo fichero](#form--post-en-el-mismo-fichero)
     - [Tabla con arrays formulario](#tabla-con-arrays-formulario)
+    - [Radio button sticky array asociativo](#radio-button-sticky-array-asociativo)
   - [Tablas](#tablas)
+    - [Tabla con array asociativo básico](#tabla-con-array-asociativo-básico)
 
 ## Condicionales
 
@@ -866,6 +868,61 @@ return FALSE;
 
 ````
 
+### Radio button sticky array asociativo
+
+````
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<?php
+
+$array = [
+    "Toy_Story" => "First Pixar film",
+    "The_incredible" => "Better than Marvel",
+    "Cars" => "Best film about cars, ever",
+    "WALL-E" => "Is it our future?",
+    "Lightyear" => "The last one, until now"
+];
+?>
+<body>
+    <form action="" method="post">
+        <p>Choose one from the following ones by Pixar.</p>
+        <?php
+        foreach ($array as $film => $description) {
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                if ($_POST["radiobutton"] == $film) {
+                    echo "<input type='radio' id=$film name='radiobutton' value=$film checked>";
+                    echo "<label for=$film>$film</label><br>";
+                } else {
+                    echo "<input type='radio' id=$film name='radiobutton' value=$film>";
+                    echo "<label for=$film>$film</label><br>";
+                }
+            } else {
+                echo "<input type='radio' id=$film name='radiobutton' value=$film>";
+                echo "<label for=$film>$film</label><br>";
+            }
+        }
+        ?>
+        <br>
+        <input type="submit">
+    </form>
+
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+        echo $_POST["radiobutton"] . ": ". $array[$_POST["radiobutton"]];
+
+    }
+
+    ?>
+</body>
+
+</html>
+````
 
 ## Tablas
 
@@ -892,4 +949,46 @@ return FALSE;
     </tbody>
 </table>
 
+````
+### Tabla con array asociativo básico
+````
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="iso-8859-1">
+</head>
+<?php
+$string = [
+    ["surname" => "Rigo", "name" => "Andreu", "address" => "My Street, 99", "phone" => "666999666"],
+    ["surname" => "Doe", "name" => "John", "address" => "5th Avenue, 3", "phone" => "333111333"]
+];
+
+echo "<table >";
+echo "<td>Surname</td>";
+echo "<td>Name</td>";
+echo "<td>Address</td>";
+echo "<td>Phone</td>";
+
+
+foreach ($string as $case) {
+    echo "<tr>";
+    foreach ($case as $value) {
+        echo "<td>$value</td>";
+    }
+    echo "</tr>";
+}
+?>
+
+<body>
+</body>
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid black;
+    }
+</style>
+
+</html>
 ````
