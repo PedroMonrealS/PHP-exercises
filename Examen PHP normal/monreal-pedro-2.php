@@ -18,5 +18,6 @@ function ksum($k, $array)
     return false;
 }
 
-//var_dump(ksum(17, $array));
+var_dump(ksum(18, $array));
 
+?>

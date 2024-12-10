@@ -3,6 +3,9 @@
 
 - [Guia PHP](#guia-php)
   - [Pedro Monreal Sánchez](#pedro-monreal-sánchez)
+  - [Variables](#variables)
+    - [Intval](#intval)
+    - [Strval](#strval)
   - [Condicionales](#condicionales)
     - [operador ternario](#operador-ternario)
     - [is\_int](#is_int)
@@ -57,6 +60,16 @@
     - [Select array asociativo](#select-array-asociativo)
   - [Tablas](#tablas)
     - [Tabla con array asociativo básico](#tabla-con-array-asociativo-básico)
+
+## Variables
+
+### Intval
+
+Convierte un string a un entero.
+
+### Strval
+
+Convierte un entero a un string.
 
 ## Condicionales
 

@@ -12,7 +12,6 @@ $table = [
     ["Country" => "Germany", "Area(sq-km)" => "357596", "Population" => "82720000", "Capital" => "Berlin"],
     ["Country" => "Italy", "Area(sq-km)" => "301340", "Population" => "58970000", "Capital" => "Rome"]
 ];
-
 $maxdensity = 0;
 foreach ($table as $country) {
     $density = intval($country["Population"] / $country["Area(sq-km)"]);
