@@ -60,6 +60,16 @@
     - [Select array asociativo](#select-array-asociativo)
   - [Tablas](#tablas)
     - [Tabla con array asociativo básico](#tabla-con-array-asociativo-básico)
+  - [Cookies](#cookies)
+    - [Establecer cookie](#establecer-cookie)
+    - [Obtener cookie](#obtener-cookie)
+    - [Eliminar cookie](#eliminar-cookie)
+  - [Base de datos](#base-de-datos)
+    - [PDO connect](#pdo-connect)
+    - [PDO file](#pdo-file)
+    - [Consulta SQL](#consulta-sql)
+    - [Insert SQL](#insert-sql)
+    - [Ejemplo completo SQL](#ejemplo-completo-sql)
 
 ## Variables
 
@@ -1052,4 +1062,147 @@ foreach ($string as $case) {
 </style>
 
 </html>
+````
+
+## Cookies
+
+### Establecer cookie
+
+````
+setcookie("number2guess","Valor cookie",(time()+3600*24*30));
+````
+### Obtener cookie
+
+````
+$_COOKIE["number2guess"]
+````
+
+### Eliminar cookie
+
+Se emplea isset para verificar que exista.
+````
+if (isset($_COOKIE['number2guess'])) {
+    setcookie('number2guess','',(time()-3600));
+
+}
+````
+
+## Base de datos
+
+### PDO connect
+
+````
+require('./pdo_connect.php');
+````
+
+### PDO file
+
+````
+<?php
+$flag=FALSE;
+try {
+    $pdo = new PDO('mysql:host=localhost;dbname=register;charset=utf8mb4', 'databasePHP', '');
+    $output = 'Database connection established.';
+} catch (PDOException $e) {
+    $output = 'Unable to connect to the database server: ' . $e->getMessage(). ' in ' .$e->getFile() . ':' . $e->getLine();
+    $flag=TRUE;
+}
+if ($flag) die ("<p>$output</p>");
+else echo "<p>$output</p>";
+?>
+````
+
+
+### Consulta SQL
+
+````
+$q = "SELECT last_name, first_name, DATE_FORMAT(registration_date, '%M %d, %Y') AS dr, user_id FROM users ORDER BY registration_date ASC";
+
+$result = $pdo->query($q);
+$rows=$result->fetchAll();
+````
+
+### Insert SQL
+
+````
+    $nombre = "HOLA";
+
+    $queryOK=TRUE;
+try {
+    $q = "INSERT INTO Nombres (nombre) VALUES (:nombre)";
+
+    $stmnt = $pdo->prepare($q);
+    $stmnt->bindValue(':nombre',$nombre);
+    $stmnt->execute();
+} catch(PDOException $ex) {
+    $queryOK=FALSE;
+    $output = 'Database error: ' . $ex->getMessage() . ' in ' .$ex->getFile() . ':' . $ex->getLine();
+}
+if ($queryOK) {
+    echo "Register added to Database<br>";
+} else {
+    echo "Please try again later<br>";
+    echo "Debug information:<br>";
+    echo $output."<br>";
+    echo $q."<br>";
+}
+````
+
+
+### Ejemplo completo SQL
+
+`````
+<?php
+require('./pdo_connect.php');
+
+$q = "SELECT * FROM Nombres";
+
+$result = $pdo->query($q);
+$rows=$result->fetchAll();
+foreach ($rows as $row) {
+    echo $row['Nombre']."<br>";
+}
+
+if($_SERVER["REQUEST_METHOD"] == "POST")
+if(isset($_POST['nombres'])) {
+    $nombre = $_POST['nombres'];
+
+    $queryOK=TRUE;
+try {
+    $q = "INSERT INTO Nombres (nombre) VALUES (:nombre)";
+
+    $stmnt = $pdo->prepare($q);
+    $stmnt->bindValue(':nombre',$nombre);
+    $stmnt->execute();
+} catch(PDOException $ex) {
+    $queryOK=FALSE;
+    $output = 'Database error: ' . $ex->getMessage() . ' in ' .$ex->getFile() . ':' . $ex->getLine();
+}
+if ($queryOK) {
+    echo "Register added to Database<br>";
+} else {
+    echo "Please try again later<br>";
+    echo "Debug information:<br>";
+    echo $output."<br>";
+    echo $q."<br>";
+}
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <br><br><br>
+    <form action="" method="post">
+        <input type="text" name="nombres">
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
+
 ````
