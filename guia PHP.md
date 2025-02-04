@@ -73,6 +73,7 @@
     - [Insert SQL](#insert-sql)
     - [Delete SQL](#delete-sql)
     - [Pasar info por URL](#pasar-info-por-url-1)
+    - [FetchAll()](#fetchall)
     - [Ejemplo completo SQL](#ejemplo-completo-sql)
 
 ## Variables
@@ -1151,7 +1152,7 @@ else echo "<p>$output</p>";
 $q = "SELECT last_name, first_name, DATE_FORMAT(registration_date, '%M %d, %Y') AS dr, user_id FROM users ORDER BY registration_date ASC";
 
 $result = $pdo->query($q);
-$rows=$result->fetchAll();
+$rows=$result->fetchAll(PDO::FETCH_NUM);
 ````
 
 ### Insert SQL
@@ -1231,6 +1232,18 @@ Destino
 $_GET['nombre'];
 ````
 
+### FetchAll()
+Devuelve un array que contiene todas las filas del conjunto de resultados
+
+Array asociativo
+````
+fetchAll(PDO::FETCH_ASSOC);
+````
+
+Array index
+````
+fetchAll(PDO::FETCH_NUM);
+````
 ### Ejemplo completo SQL
 
 `````
@@ -1240,7 +1253,7 @@ require('./pdo_connect.php');
 $q = "SELECT * FROM Nombres";
 
 $result = $pdo->query($q);
-$rows=$result->fetchAll();
+$rows=$result->fetchAll(PDO::FETCH_NUM);
 foreach ($rows as $row) {
     echo $row['Nombre']."<br>";
 }
