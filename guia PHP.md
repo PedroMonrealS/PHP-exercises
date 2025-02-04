@@ -66,6 +66,9 @@
     - [Establecer cookie](#establecer-cookie)
     - [Obtener cookie](#obtener-cookie)
     - [Eliminar cookie](#eliminar-cookie)
+  - [Session](#session)
+    - [Session start](#session-start)
+    - [Session destroy](#session-destroy)
   - [Base de datos](#base-de-datos)
     - [PDO connect](#pdo-connect)
     - [PDO file](#pdo-file)
@@ -1118,6 +1121,40 @@ if (isset($_COOKIE['number2guess'])) {
     setcookie('number2guess','',(time()-3600));
 
 }
+````
+
+## Session
+
+### Session start
+````
+<?php
+session_start();
+
+if (isset($_SESSION['name'])) {
+    echo "Hello " . $_SESSION['name']."<br>";
+    echo "<a href='reset.php'>RESET</a>";
+} else {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $_SESSION['name'] = $_POST["name"];
+
+    }
+    echo "
+            <form method='post' action=''>
+            <input type='text' name='name'>
+            <input type='submit'>
+            </form>";
+}
+?>
+````
+### Session destroy
+````
+<?php
+session_start();
+$_SESSION=[];
+session_destroy();
+echo "<a href='greeting.php'>RETURN</a>";
+
+?>
 ````
 
 ## Base de datos
