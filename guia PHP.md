@@ -44,6 +44,7 @@
     - [Array](#array)
     - [array\_merge](#array_merge)
     - [array asociativo](#array-asociativo)
+    - [array\_column](#array_column)
   - [Bucles](#bucles)
     - [for](#for)
     - [For de 3 en 3](#for-de-3-en-3)
@@ -577,6 +578,18 @@ $phoneNumbers = array(
     "Luis" => "555-555-5555",
     "Marta" => "333-333-3333"
 );
+
+````
+
+### array_column
+
+Extrae una columna de un array asociativo
+````
+
+array(2) { [0]=> array(1) { ["weight"]=> float(15) } [1]=> array(1) { ["weight"]=> float(90) } }
+
+
+$weights = array_column($rows, 'weight');
 
 ````
 
