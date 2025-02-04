@@ -55,6 +55,7 @@
   - [Operadores](#operadores)
     - [$val+= 5;](#val-5)
   - [HTML + PHP](#html--php)
+    - [Pasar info por URL](#pasar-info-por-url)
     - [**Form** + **post** en el mismo fichero](#form--post-en-el-mismo-fichero)
     - [Tabla con arrays formulario](#tabla-con-arrays-formulario)
     - [Radio button sticky array asociativo](#radio-button-sticky-array-asociativo)
@@ -70,6 +71,8 @@
     - [PDO file](#pdo-file)
     - [Consulta SQL](#consulta-sql)
     - [Insert SQL](#insert-sql)
+    - [Delete SQL](#delete-sql)
+    - [Pasar info por URL](#pasar-info-por-url-1)
     - [Ejemplo completo SQL](#ejemplo-completo-sql)
 
 ## Variables
@@ -765,6 +768,22 @@ $val = $val + 5;
 ````
 ## HTML + PHP   
 
+### Pasar info por URL
+
+Podmeos pasar información de una web a otra, se debe emplear:
+
+
+Origen
+
+````
+href='index.php?nombre='Pedro'
+````
+Destino
+
+````
+$_GET['nombre'];
+````
+
 ### **Form** + **post** en el mismo fichero
 
 ````
@@ -1161,6 +1180,56 @@ if ($queryOK) {
 }
 ````
 
+
+### Delete SQL
+
+````
+<?php
+        require('pdo-connect.php');
+
+        $queryOK = TRUE;
+
+        try {
+            $q = "DELETE FROM trabajadores WHERE dni = :dni";
+
+            $stmnt = $pdo->prepare($q);
+            $stmnt->bindValue(":dni", $dni);
+            $stmnt->execute();
+            
+        } catch (PDOException $ex){
+
+            $queryOK = FALSE;
+            $output = 'Database error: ' . $ex->getMessage() . ' in ' . $ex->getFile() . ":" . $ex->getLine();
+
+        }
+
+        if ($queryOK) {
+            echo "Register deleted from Database<br>";
+        } else {//Manejo errores
+            echo "Please try again later<br>";
+            echo "Debug information:<br>";
+            echo $output . "<br>";
+            echo $q . "<br>";
+        }
+
+?>
+````
+
+### Pasar info por URL
+
+Podmeos pasar información de una web a otra, se debe emplear:
+
+
+Origen
+
+````
+href='index.php?nombre='Pedro'
+````
+Destino
+
+````
+$_GET['nombre'];
+````
 
 ### Ejemplo completo SQL
 

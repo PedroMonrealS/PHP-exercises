@@ -1,72 +1,73 @@
-<!doctype html>
-<html lang="en">
+<?php
+// Debemos manejar las cookies antes de cualquier salida HTML
+if ($_SERVER["REQUEST_METHOD"] != "POST") {
+    $n1 = rand(1, 50) * 2;
+    $n2 = rand(1, 9);
+    setcookie("n1", $n1, time() + 3600 * 24 * 30);
+    setcookie("n2", $n2, time() + 3600 * 24 * 30);
+} else {
+    if (isset($_COOKIE['n1']) && isset($_COOKIE['n2'])) {
+        $n1 = $_COOKIE['n1'];
+        $n2 = $_COOKIE['n2'];
+    }
+}
+?>
 
+<!doctype html>
+<html lang="es">
 <head>
     <meta charset="iso-8859-1">
+    <title>División PHP</title>
 </head>
-<h1>To save your results <a href="login.php">define your user</a></h1>
-<a href="logout.php">logout</a>
-
-
 <body>
+    <h1>To save your results <a href="login.php">define your user</a></h1>
+    <a href="logout.php">logout</a>
+
     <form method="post" action="">
         <?php
         if ($_SERVER["REQUEST_METHOD"] != "POST") {
-            echo "<h1> User: " . $_COOKIE['username'] . "</h1>";
-            $n1 = $randomNumber = rand(1, 50) * 2;
-            $n2 = $randomNumber = rand(1, 9);
-            setcookie("n1", $n1, (time() + 3600 * 24 * 30));
-            setcookie("n2", $n2, (time() + 3600 * 24 * 30));
-
-            echo "Quotient = " . $n1 / $n2 . "<br>";
-            echo "Remainder = " . $n1 % $n2 . "<br>";
-
-
+            echo "<h1> User: " . ($_COOKIE['username'] ?? "Guest") . "</h1>";
+            echo "Quotient = " . ($n1 / $n2) . "<br>";
+            echo "Remainder = " . ($n1 % $n2) . "<br>";
             echo "Divide " . $n1 . " between " . $n2 . "<br><br>";
-            echo "<label for='quotient'>Quotient</label>
-        <input type='text' name='quotient'>
-        <br><br>
-        <label for='remainder'>Remainder</label>
-        <input type='text' name='remainder'>
-        <br><br>
-        <input type='submit'>
-    </form>";
-        } else {
-            $n1 = $_COOKIE['n1'];
-            $n2 = $_COOKIE['n2'];
-        }
         ?>
+            <label for="quotient">Quotient</label>
+            <input type="text" name="quotient"><br><br>
 
+            <label for="remainder">Remainder</label>
+            <input type="text" name="remainder"><br><br>
+
+            <input type="submit" value="Submit">
         <?php
-
-
-        function verificarResultado($n1, $n2)
-        {
-            if ($n1 / $n2 == $_POST['quotient'] && $n1 % $n2 == $_POST['remainder']) {
-                echo "Correct";
-            } else {
-                if ($n1 / $n2 != $_POST['quotient']) {
-                    echo "The quotient is " . $n1 / $n2 . " and you answered " . $_POST['quotient'] . "<br>";
-                } else {
-                    echo "The quotient is " . $n1 / $n2 . " and you answered correctly <br>";
-                }
-                if ($n1 % $n2 != $_POST['remainder']) {
-                    echo "The remainder is " . $n1 % $n2 . " and you answered " . $_POST['remainder'] . "<br>";
-                } else {
-                    echo "The remainder is " . $n1 % $n2 . " and you answered correctly <br>";
-                }
-            }
-            echo "<br><br><a href='index.php'>Let's divide again</a>";
-        }
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            if ($_POST['quotient'] == "" || $_POST['remainder'] == "") {
+        } else {
+            if (empty($_POST['quotient']) || empty($_POST['remainder'])) {
                 echo "Please enter the values";
             } else {
                 verificarResultado($n1, $n2);
             }
         }
+
+        function verificarResultado($n1, $n2) {
+            $userQuotient = $_POST['quotient'];
+            $userRemainder = $_POST['remainder'];
+
+            if (intval($n1 / $n2) == $userQuotient && $n1 % $n2 == $userRemainder) {
+                echo "Correct";
+            } else {
+                if (intval($n1 / $n2) != $userQuotient) {
+                    echo "The quotient is " . intval($n1 / $n2) . " and you answered " . $userQuotient . "<br>";
+                } else {
+                    echo "The quotient is " . intval($n1 / $n2) . " and you answered correctly <br>";
+                }
+                if ($n1 % $n2 != $userRemainder) {
+                    echo "The remainder is " . ($n1 % $n2) . " and you answered " . $userRemainder . "<br>";
+                } else {
+                    echo "The remainder is " . ($n1 % $n2) . " and you answered correctly <br>";
+                }
+            }
+            echo "<br><br><a href='index.php'>Let's divide again</a>";
+        }
         ?>
-
+    </form>
 </body>
-
 </html>
